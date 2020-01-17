@@ -5,23 +5,23 @@ import { cn } from '../lib/helpers';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import styles from './header.module.css';
+import BackgroundImage from 'gatsby-background-image';
 
 const dynamicStyle = props =>
   css`
-    background-image: url(${props.background});
-    background-size: cover;
     min-height: 200px;
     height: calc(100vh / 3 * 2);
-    background-position: center;
   `;
 
-const BackgroundDiv = styled.div`
+const BackgroundDiv = styled(BackgroundImage)`
   ${dynamicStyle};
 `;
 
 const Header = ({ onHideNav, onShowNav, showNav, siteTitle, background }) => (
   <>
-    <BackgroundDiv background={background}>&nbsp;</BackgroundDiv>
+    <BackgroundDiv tag="div" fluid={background}>
+      &nbsp;
+    </BackgroundDiv>
     <div className={styles.root}>
       <div className={styles.wrapper}>
         <div className={styles.branding}>

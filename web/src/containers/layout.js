@@ -8,7 +8,9 @@ const query = graphql`
       title
       siteImage {
         asset {
-          url
+          fluid(maxWidth: 700) {
+            ...GatsbySanityImageFluid
+          }
         }
       }
     }
@@ -39,7 +41,7 @@ function LayoutContainer(props) {
             siteTitle={data.site.title}
             onHideNav={handleHideNav}
             onShowNav={handleShowNav}
-            background={data.site.siteImage.asset.url}
+            background={data.site.siteImage.asset.fluid}
           />
         );
       }}
