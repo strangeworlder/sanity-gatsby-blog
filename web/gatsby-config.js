@@ -50,7 +50,13 @@ module.exports = {
                     edge.node.dateString +
                     '/' +
                     edge.node.slug.current,
-                  custom_elements: [{ 'content:encoded': edge.node._rawbody }]
+                  custom_elements: [
+                    {
+                      'content:encoded': `${edge.node._rawBody[0].children.map(childElement => {
+                        return childElement + ' ';
+                      })}`
+                    }
+                  ]
                 });
               });
             },
