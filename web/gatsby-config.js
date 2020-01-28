@@ -44,8 +44,13 @@ module.exports = {
                     edge.node.dateString +
                     '/' +
                     edge.node.slug.current,
-                  guid: site.siteMetadata.siteUrl + '/blog/' + '/' + edge.node.slug.current,
-                  custom_elements: [{ 'content:encoded': edge.node.body }]
+                  guid:
+                    site.siteMetadata.siteUrl +
+                    '/blog/' +
+                    edge.node.dateString +
+                    '/' +
+                    edge.node.slug.current,
+                  custom_elements: [{ 'content:encoded': edge.node._rawbody }]
                 });
               });
             },
@@ -63,6 +68,7 @@ module.exports = {
                       publishedAt
                       dateString:publishedAt(formatString: "YYYY/MM")
                       id
+                      _rawBody
                     }
                   }
                 }
