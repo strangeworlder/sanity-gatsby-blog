@@ -40,7 +40,7 @@ module.exports = {
                   url:
                     site.siteMetadata.siteUrl +
                     '/blog/' +
-                    edge.node.publishedAt +
+                    edge.node.dateString +
                     '/' +
                     edge.node.slug.current,
                   guid: site.siteMetadata.siteUrl + '/blog/' + '/' + edge.node.slug.current,
@@ -60,6 +60,7 @@ module.exports = {
                       }
                       title
                       publishedAt
+                      dateString:publishedAt(formatString: "YYYY/MM")
                       id
                     }
                   }
