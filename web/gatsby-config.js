@@ -33,7 +33,6 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allSanityPost } }) => {
-              const dateSegment = format(publishedAt, 'YYYY/MM');
               return allSanityPost.edges.map(edge => {
                 return Object.assign({}, edge.node.id, {
                   description: edge.node.excerpt,
@@ -41,15 +40,10 @@ module.exports = {
                   url:
                     site.siteMetadata.siteUrl +
                     '/blog/' +
-                    dateSegment +
+                    edge.node.publishedAt +
                     '/' +
                     edge.node.slug.current,
-                  guid:
-                    site.siteMetadata.siteUrl +
-                    '/blog/' +
-                    dateSegment +
-                    '/' +
-                    edge.node.slug.current,
+                  guid: site.siteMetadata.siteUrl + '/blog/' + '/' + edge.node.slug.current,
                   custom_elements: [{ 'content:encoded': edge.node.body }]
                 });
               });
