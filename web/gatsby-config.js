@@ -37,6 +37,7 @@ module.exports = {
                 return Object.assign({}, edge.node.id, {
                   description: edge.node.excerpt,
                   date: edge.node.publishedAt,
+                  title: edge.node.title,
                   url:
                     site.siteMetadata.siteUrl +
                     '/blog/' +
