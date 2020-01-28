@@ -11,7 +11,62 @@ module.exports = {
     siteUrl: `https://localhost:8000`
   },
   plugins: [
-    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `{
+        allSanitySiteSettings {
+          nodes {
+            title
+            description
+          }
+        }
+        site {
+          siteMetadata {
+            siteUrl
+            site_url:siteUrl
+            
+          }
+        }
+      }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allSanityPost } }) => {
+              return allSanityPost.edges.map(edge => {
+                return Object.assign({}, edge.node.id, {
+                  description: edge.node.excerpt,
+                  date: edge.node.publishedAt,
+                  url: site.siteMetadata.siteUrl + edge.node.slug.current,
+                  guid: site.siteMetadata.siteUrl + edge.node.slug.current,
+                  custom_elements: [{ 'content:encoded': edge.node.body }]
+                });
+              });
+            },
+            query: `
+              {
+                allSanityPost(
+                  sort: { order: DESC, fields: publishedAt },
+                ) {
+                  edges {
+                    node {
+                      slug {
+                        current
+                      }
+                      title
+                      publishedAt
+                      id
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: "Your Site's RSS Feed"
+          }
+        ]
+      }
+    },
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
     {

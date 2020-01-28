@@ -44,6 +44,7 @@
     "gatsby-plugin-manifest": "^2.2.37",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-sharp": "^2.3.13",
+    "gatsby-source-filesystem": "^2.1.46",
     "sharp": "^0.24.0"
   }
 }
