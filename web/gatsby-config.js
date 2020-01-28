@@ -8,7 +8,7 @@ const clientConfig = require('./client-config');
 const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://localhost:8000`
+    siteUrl: `https://sanity-gatsby-blog-web-xsrb3ocv.netlify.com/`
   },
   plugins: [
     {
@@ -33,12 +33,23 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allSanityPost } }) => {
+              const dateSegment = format(publishedAt, 'YYYY/MM');
               return allSanityPost.edges.map(edge => {
                 return Object.assign({}, edge.node.id, {
                   description: edge.node.excerpt,
                   date: edge.node.publishedAt,
-                  url: site.siteMetadata.siteUrl + edge.node.slug.current,
-                  guid: site.siteMetadata.siteUrl + edge.node.slug.current,
+                  url:
+                    site.siteMetadata.siteUrl +
+                    '/blog/' +
+                    dateSegment +
+                    '/' +
+                    edge.node.slug.current,
+                  guid:
+                    site.siteMetadata.siteUrl +
+                    '/blog/' +
+                    dateSegment +
+                    '/' +
+                    edge.node.slug.current,
                   custom_elements: [{ 'content:encoded': edge.node.body }]
                 });
               });
