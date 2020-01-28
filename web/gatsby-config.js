@@ -53,7 +53,7 @@ module.exports = {
                   custom_elements: [
                     {
                       'content:encoded': `${edge.node._rawBody[0].children.map(childElement => {
-                        return childElement + ' ';
+                        return childElement.text + ' ';
                       })}`
                     }
                   ]
